@@ -25,11 +25,11 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r WikipediaAutomation/requirements.txt
+    pip install -r requirements.txt
     npm install chromedriver
   displayName: 'Install dependencies'
 
-- powershell: robot --pythonpath . -x outputreport.xml WikipediaAutomation/Scripts/Login.robot
+- powershell: robot --pythonpath . -x outputreport.xml Scripts/Login.robot
   displayName: 'LoginTestCase'
 
 - task: PublishTestResults@2
