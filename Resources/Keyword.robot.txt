@@ -1,0 +1,42 @@
+*** Settings ***
+Library           SeleniumLibrary
+Resource          OR.txt
+Library           Screenshot
+Library		  ExcelRobot
+
+*** Variables ***
+${url}            https://en.wikipedia.org/wiki/Wikipedia
+
+*** Keywords ***
+ExcelReading
+    [Arguments]    ${Excel_Name}    ${column_no}    ${row_no}    ${sheetname}
+    Open Excel    ${Excel_Name}
+    ${value}=    Read Cell Data    ${sheetname}    ${column_no}    ${row_no}
+    Log To Console    ${value}
+    [Return]    ${value}
+
+RowNumber
+    [Arguments]    ${Excel_Name}    ${sheetname}
+    Open Excel    ${Excel_Name}
+    ${rownum}=    Get Row Count    ${sheetname}
+    Log To Console    ${rownum}
+    [Return]    ${rownum}
+
+Login To Application
+    [Arguments]    ${username}    ${password}
+    Open Browser    ${url}    chrome    options=add_argument("disable-infobars"); add_argument("--ignore-certificate-errors")
+    Set Browser Implicit Wait    8s
+    Maximize Browser Window
+    Click Element    ${lnk_Login}
+    sleep      2s
+    Input Text    ${input_username}    ${username}
+    Input Text    ${input_password}    ${password}
+    sleep    3s
+    Click Element    ${btn_login}
+
+Logout
+    Wait Until Element Is Visible    ${lnk_logout}    50s
+    Click Element    ${lnk_logout}
+
+Validate Incorrect Password Message
+    Element should be visible       ${err_incorrectPassword}

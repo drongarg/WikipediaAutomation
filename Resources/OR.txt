@@ -1,0 +1,7 @@
+*** Variables ***
+${lnk_Login}	     //a[text()='Log in']
+${input_username}    //input[@id='wpName1']
+${input_password}    //input[@id='wpPassword1']
+${btn_login}      //button[@id='wpLoginAttempt']
+${lnk_logout}     //a[@title='Log out']
+${err_incorrectPassword}        //div[contains(text(),'Incorrect username or password')]
