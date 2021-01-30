@@ -29,12 +29,12 @@ steps:
     npm install chromedriver
   displayName: 'Install dependencies'
 
-- powershell: robot --pythonpath . -x outputreport.xml -d Results Scripts/*.robot
+- powershell: robot --pythonpath .  -d Results -x outputreport.xml Scripts/*.robot
   displayName: 'LoginTestCase'
 
 - task: PublishTestResults@2
   inputs:
-    testResultsFiles: outputreport.xml
+    testResultsFiles: Results/outputreport.xml
     searchFolder: 'D:\a\1\s\'
   condition: succeededOrFailed()
   displayName: 'Publish Test Results'
